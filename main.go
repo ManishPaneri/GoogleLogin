@@ -1,7 +1,8 @@
 package main
 
 import (
-	"encoding/json"
+	// "encoding/json"
+	"GoogleLogin/controllers"
 	"fmt"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
@@ -10,7 +11,6 @@ import (
 	"github.com/spf13/viper"
 	"log"
 	"net/http"
-	"GoogleLogin/controllers"
 )
 
 func init() {
@@ -33,7 +33,6 @@ func main() {
 	handler = c.Handler(handler)
 	http.ListenAndServe(":9000", handler)
 }
-
 
 //function to register the database to beego orm
 func registerDatabase() {

@@ -1,24 +1,24 @@
 package controllers
 
 import (
+	"GoogleLogin/models"
 	"encoding/json"
 	"fmt"
-	"github.com/spf13/cast"
-	"net/http"
-	"time"
-	"GoogleLogin/models"
 	"github.com/kataras/go-sessions"
+	"github.com/spf13/cast"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
-		"io/ioutil"
+	"io/ioutil"
+	"net/http"
+	"time"
 )
 
 const htmlIndex = `<html><body><a href="/GoogleLogin">Log in with Google</a></body></html>`
 
 var (
 	googleOauthConfig = &oauth2.Config{
-		RedirectURL:  "http://localhost:9000/GoogleCallback",
-		ClientID:     "",
+		RedirectURL: "http://localhost:9000/GoogleCallback",
+		ClientID:    "",
 		ClientSecret: "	",
 		Scopes: []string{"https://www.googleapis.com/auth/userinfo.profile",
 			"https://www.googleapis.com/auth/userinfo.email"},
@@ -55,6 +55,7 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	response, err := http.Get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token.AccessToken)
 
 	URL := "static/redirect/path"
+	fmt.Println(URL)
 	defer response.Body.Close()
 	contents, err := ioutil.ReadAll(response.Body)
 
